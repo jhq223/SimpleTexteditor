@@ -1,0 +1,164 @@
+JFDML JFormDesigner: "7.0.5.1.409" Java: "11.0.14.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {space :::p, comp label1:::p::p, space ::492:x}, seq t {space ::402:x, comp label5:::p::p, space u:::p, comp label2:::p::p, space :p:12:p}, comp scrollPane1::l::498:x}"
+			"$verticalGroup": "par l {seq l {comp scrollPane1::::319:x, space :p:5:p, par t {comp label1:::p::p, par b:t {comp label5::b:p::p, comp label2::b:p::p}}, space :p:5:p}}"
+		} ) {
+			name: "this"
+			"minimumSize": new java.awt.Dimension( 500, 400 )
+			"defaultCloseOperation": 0
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"preferredSize": new java.awt.Dimension( 7, 23 )
+				add( new FormComponent( "com.jhq223.editor.view.MyTextPane" ) {
+					name: "textPane1"
+					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 16 )
+					addEvent( new FormEvent( "javax.swing.event.CaretListener", "caretUpdate", "textPane1CaretUpdate", true ) )
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseReleased", "label1MouseReleased", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "统计"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label5"
+				"text": "光标位置"
+			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar1"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu1"
+					"text": "文件(F)"
+					"mnemonic": 70
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem2"
+						"text": "打开(O)"
+						"mnemonic": 79
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem2", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem3"
+						"text": "保存(S)"
+						"accelerator": static javax.swing.KeyStroke getKeyStroke( 83, 130, false )
+						"mnemonic": 83
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem3", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
+						name: "separator1"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem5"
+						"text": "退出(X)"
+						"mnemonic": 88
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem5", true ) )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu2"
+					"text": "编辑(E)"
+					"mnemonic": 69
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem13"
+						"text": "撤销(U)"
+						"mnemonic": 85
+						"accelerator": static javax.swing.KeyStroke getKeyStroke( 90, 130, false )
+						"enabled": false
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem13", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
+						name: "separator5"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem4"
+						"text": "剪切(T)"
+						"accelerator": static javax.swing.KeyStroke getKeyStroke( 88, 130, false )
+						"mnemonic": 84
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem4", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem8"
+						"text": "复制(C)"
+						"mnemonic": 67
+						"accelerator": static javax.swing.KeyStroke getKeyStroke( 67, 130, false )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem8", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem16"
+						"text": "粘贴(V)"
+						"mnemonic": 86
+						"accelerator": static javax.swing.KeyStroke getKeyStroke( 86, 130, false )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem16", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem9"
+						"text": "删除(D)"
+						"mnemonic": 68
+						"accelerator": static javax.swing.KeyStroke getKeyStroke( 127, 0, false )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem9", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
+						name: "separator3"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem12"
+						"text": "全选(A)"
+						"mnemonic": 65
+						"accelerator": static javax.swing.KeyStroke getKeyStroke( 65, 130, false )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem12", true ) )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu4"
+					"text": "帮助(H)"
+					"mnemonic": 72
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem14"
+						"text": "帮助(H)"
+						"mnemonic": 72
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem14", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem15"
+						"text": "关于(A)"
+						"mnemonic": 65
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem15", true ) )
+					} )
+				} )
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 60, 20 )
+			"size": new java.awt.Dimension( 500, 400 )
+		} )
+		add( new FormContainer( "javax.swing.JPopupMenu", new FormLayoutManager( class javax.swing.JPopupMenu ) ) {
+			name: "popupMenu1"
+			add( new FormComponent( "javax.swing.JMenuItem" ) {
+				name: "menuItem17"
+				"text": "复制文件路径"
+			} )
+			add( new FormComponent( "javax.swing.JMenuItem" ) {
+				name: "menuItem18"
+				"text": "打开路径文件夹"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem18", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
+				name: "separator6"
+			} )
+			add( new FormComponent( "javax.swing.JMenuItem" ) {
+				name: "menuItem19"
+				"text": "重命名"
+				"accelerator": static javax.swing.KeyStroke getKeyStroke( 113, 0, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem19", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 70, 480 )
+		} )
+	}
+}
