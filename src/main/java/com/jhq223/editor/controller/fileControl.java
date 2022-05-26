@@ -6,7 +6,7 @@
  *
  */
 
-package com.jhq223.editor.control;
+package com.jhq223.editor.controller;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;

@@ -16,7 +16,8 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.*;
 import javax.swing.event.*;
 import com.formdev.flatlaf.FlatDarculaLaf;
-import com.jhq223.editor.control.fileControl;
+import com.jhq223.editor.controller.ViewController;
+import com.jhq223.editor.controller.fileControl;
 
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -28,8 +29,8 @@ import java.io.IOException;
 /**
  * @author 今何求
  */
-public class Main extends JFrame {
-    public Main() {
+public class RootView extends JFrame {
+    public RootView() {
         initComponents();
     }
 
@@ -38,7 +39,6 @@ public class Main extends JFrame {
     private void textPane1CaretUpdate(CaretEvent e) {
         label5.setText("第"+textPane1.getLineAtCaret()+"行,第"+textPane1.getColumnAtCaret()+"列");
     }
-
 
     //*****菜单事件*****
 
@@ -61,12 +61,12 @@ public class Main extends JFrame {
 
     //-----菜单退出-----
     private void menuItem5(ActionEvent e) {
-       exit();
+       ViewController.exit(this);
     }
 
     //-----撤销-----
     private void menuItem13(ActionEvent e) {
-        undoManager.undo();
+         textPane1.getUndoManager().undo();
     }
 
     //-----剪切-----
@@ -113,6 +113,8 @@ public class Main extends JFrame {
     }
 
 
+
+
     //----重命名-----
     private void menuItem19(ActionEvent e) {
         String newname = JOptionPane.showInputDialog(null,"请输入文件名",new File(label1.getText()).getName());
@@ -138,18 +140,7 @@ public class Main extends JFrame {
         }
     }
 
-    //-----退出方法-----
-    private void exit() {
-        if (JOptionPane.showConfirmDialog(this,"确认退出？","退出",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
-            dispose();
-            System.exit(0);
-        }
-    }
-
     //*****菜单事件*****
-
-    //-----设置撤销监听器-----
-    private UndoManager undoManager = new UndoManager();
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -363,32 +354,32 @@ public class Main extends JFrame {
             popupMenu1.add(menuItem19);
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
-
         textPane1.setShowLineNumber(true);
         label5.setText("第"+textPane1.getLineAtCaret()+"行,第"+textPane1.getColumnAtCaret()+"列");
         label2.setText("共"+textPane1.getDocument().getLength()+"字符");
 
 
+
         //-----text监听改变-----
         textPane1.getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void insertUpdate(DocumentEvent e) {
-                label2.setText("共"+textPane1.getDocument().getLength()+"字符");
-                if (undoManager.canUndo()) {
-                    menuItem13.setEnabled(true);
-                }else {
-                    menuItem13.setEnabled(false);
-                }
-
+        public void insertUpdate(DocumentEvent e) {
+            label2.setText("共"+textPane1.getDocument().getLength()+"字符");
+            if (undoManager.canUndo()) {
+                menuItem2.setEnabled(true);
+            }else {
+                menuItem2.setEnabled(false);
             }
+
+        }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 label2.setText("共"+textPane1.getDocument().getLength()+"字符");
                 if (undoManager.canUndo()) {
-                    menuItem13.setEnabled(true);
+                    menuItem2.setEnabled(true);
                 }else {
-                    menuItem13.setEnabled(false);
+                    menuItem2.setEnabled(false);
                 }
 
             }
@@ -397,25 +388,17 @@ public class Main extends JFrame {
             public void changedUpdate(DocumentEvent e) {
                 label2.setText("共"+textPane1.getDocument().getLength()+"字符");
                 if (undoManager.canUndo()) {
-                    menuItem13.setEnabled(true);
+                    menuItem2.setEnabled(true);
                 }else {
-                    menuItem13.setEnabled(false);
+                    menuItem2.setEnabled(false);
                 }
             }
+            UndoManager undoManager = textPane1.getUndoManager();
         });
 
-        textPane1.getDocument().addUndoableEditListener(undoManager);
 
-        //-----点击退出后调用该方法-----
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                super.windowClosing(e);
-                exit();
-            }
-        });
 
-    }
+                                                     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - 今何求
@@ -444,19 +427,4 @@ public class Main extends JFrame {
     private JMenuItem menuItem18;
     private JMenuItem menuItem19;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
-
-    public static void main(String[] args) {
-        //-----初始化主题-----
-        try {
-            UIManager.setLookAndFeel( new FlatDarculaLaf() );
-        } catch( Exception ex ) {
-            System.err.println( "Failed to initialize LaF" );
-        }
-
-        Frame root = new Main();
-        root.setTitle("文本编辑器");
-        root.setVisible(true);
-    }
-
-
 }
