@@ -52,44 +52,44 @@ public class RootView extends JFrame {
     }
 
     //-----保存-----
-    private void menuItem3(ActionEvent e) {
+    private void save(ActionEvent e) {
         String str = textPane1.getText();
         FileModel.saveFile(new File(Mypath.getText()),textPane1.getText());
     }
 
     //-----菜单退出-----
-    private void menuItem5(ActionEvent e) {
+    private void exitbtn(ActionEvent e) {
        ViewController.exit(this);
     }
 
     //-----撤销-----
-    private void menuItem13(ActionEvent e) {
+    private void undo(ActionEvent e) {
          textPane1.getUndoManager().undo();
     }
 
     //-----剪切-----
-    private void menuItem4(ActionEvent e) {
+    private void cut(ActionEvent e) {
         textPane1.cut();
     }
 
     //-----复制-----
-    private void menuItem8(ActionEvent e) {
+    private void copy(ActionEvent e) {
         textPane1.copy();
     }
 
     //-----粘贴-----
-    private void menuItem16(ActionEvent e) {
+    private void paste(ActionEvent e) {
         textPane1.paste();
     }
 
     //-----删除-----
     //P.S.将选择的文本替换为空
-    private void menuItem9(ActionEvent e) {
+    private void delete(ActionEvent e) {
         textPane1.replaceSelection(null);
     }
 
     //-----全选-----
-    private void menuItem12(ActionEvent e) {
+    private void all(ActionEvent e) {
         textPane1.selectAll();
     }
 
@@ -114,7 +114,7 @@ public class RootView extends JFrame {
 
 
     //----重命名-----
-    private void menuItem19(ActionEvent e) {
+    private void rename(ActionEvent e) {
         String newname = JOptionPane.showInputDialog(null,"请输入文件名",new File(Mypath.getText()).getName());
         Mypath  .setText(FileModel.renameFile(new File(Mypath.getText()),newname));
     }
@@ -129,7 +129,7 @@ public class RootView extends JFrame {
     }
 
     //-----打开资源管理器-----
-    private void menuItem18(ActionEvent e){
+    private void openpath(ActionEvent e){
         try {
             java.awt.Desktop.getDesktop().open(new File(Mypath.getText()));
         } catch (IOException ioex){
@@ -146,14 +146,40 @@ public class RootView extends JFrame {
     }
 
     private void textPane1MouseReleased(MouseEvent e) {
-        // TODO add your code here
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            popupMenu2.show(e.getComponent(),e.getX(),e.getY());
+        }
     }
 
     private void MypathMouseReleased(MouseEvent e) {
-        // TODO add your code here
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            popupMenu1.show(e.getComponent(),e.getX(),e.getY());
+        }
     }
 
     private void CxyMouseReleased(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            popupMenu3.show(e.getComponent(),e.getX(),e.getY());
+        }
+    }
+
+    private void search(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void replace(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void redo(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void copypath(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void cxygo(ActionEvent e) {
         // TODO add your code here
     }
 
@@ -169,14 +195,14 @@ public class RootView extends JFrame {
         saveofbtn1 = new JMenuItem();
         exitbtn = new JMenuItem();
         editormenu = new JMenu();
-        menuItem13 = new JMenuItem();
-        menuItem1 = new JMenuItem();
+        undobtn1 = new JMenuItem();
+        redobtn1 = new JMenuItem();
         cutbtn1 = new JMenuItem();
         copybtn1 = new JMenuItem();
-        menuItem16 = new JMenuItem();
+        pastebtn = new JMenuItem();
         menu3 = new JMenu();
-        menuItem7 = new JMenuItem();
-        menuItem10 = new JMenuItem();
+        searchbtn1 = new JMenuItem();
+        replacebtn1 = new JMenuItem();
         deletebtn1 = new JMenuItem();
         allbtn1 = new JMenuItem();
         helpmenu = new JMenu();
@@ -188,22 +214,22 @@ public class RootView extends JFrame {
         Cxy = new JLabel();
         sum = new JLabel();
         popupMenu1 = new JPopupMenu();
-        menuItem17 = new JMenuItem();
-        menuItem18 = new JMenuItem();
-        menuItem19 = new JMenuItem();
+        copypath = new JMenuItem();
+        openpath = new JMenuItem();
+        rename = new JMenuItem();
         popupMenu2 = new JPopupMenu();
-        menuItem20 = new JMenuItem();
-        menuItem21 = new JMenuItem();
-        menuItem22 = new JMenuItem();
-        menuItem23 = new JMenuItem();
-        menuItem24 = new JMenuItem();
+        undobtn2 = new JMenuItem();
+        redobtn2 = new JMenuItem();
+        pastebtn2 = new JMenuItem();
+        cutbtn2 = new JMenuItem();
+        copybtn2 = new JMenuItem();
         menu5 = new JMenu();
-        menuItem26 = new JMenuItem();
-        menuItem27 = new JMenuItem();
-        menuItem2 = new JMenuItem();
-        menuItem25 = new JMenuItem();
+        searchbtn2 = new JMenuItem();
+        replacebtn2 = new JMenuItem();
+        deletebtn2 = new JMenuItem();
+        allbtn2 = new JMenuItem();
         popupMenu3 = new JPopupMenu();
-        menuItem3 = new JMenuItem();
+        cxygo = new JMenuItem();
 
         //======== this ========
         setMinimumSize(new Dimension(500, 400));
@@ -239,7 +265,7 @@ public class RootView extends JFrame {
                 savebtn1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
                 savebtn1.setMnemonic('S');
                 savebtn1.setEnabled(false);
-                savebtn1.addActionListener(e -> menuItem3(e));
+                savebtn1.addActionListener(e -> save(e));
                 filemenu.add(savebtn1);
 
                 //---- saveofbtn1 ----
@@ -251,7 +277,7 @@ public class RootView extends JFrame {
                 //---- exitbtn ----
                 exitbtn.setText("\u9000\u51fa(X)");
                 exitbtn.setMnemonic('X');
-                exitbtn.addActionListener(e -> menuItem5(e));
+                exitbtn.addActionListener(e -> exitbtn(e));
                 filemenu.add(exitbtn);
             }
             menuBar1.add(filemenu);
@@ -261,58 +287,61 @@ public class RootView extends JFrame {
                 editormenu.setText("\u7f16\u8f91(E)");
                 editormenu.setMnemonic('E');
 
-                //---- menuItem13 ----
-                menuItem13.setText("\u64a4\u9500(U)");
-                menuItem13.setMnemonic('U');
-                menuItem13.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK));
-                menuItem13.setEnabled(false);
-                menuItem13.addActionListener(e -> menuItem13(e));
-                editormenu.add(menuItem13);
+                //---- undobtn1 ----
+                undobtn1.setText("\u64a4\u9500(U)");
+                undobtn1.setMnemonic('U');
+                undobtn1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK));
+                undobtn1.setEnabled(false);
+                undobtn1.addActionListener(e -> undo(e));
+                editormenu.add(undobtn1);
 
-                //---- menuItem1 ----
-                menuItem1.setText("\u6062\u590d(R)");
-                menuItem1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK|KeyEvent.SHIFT_DOWN_MASK));
-                menuItem1.setEnabled(false);
-                editormenu.add(menuItem1);
+                //---- redobtn1 ----
+                redobtn1.setText("\u6062\u590d(R)");
+                redobtn1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK|KeyEvent.SHIFT_DOWN_MASK));
+                redobtn1.setEnabled(false);
+                redobtn1.addActionListener(e -> redo(e));
+                editormenu.add(redobtn1);
                 editormenu.addSeparator();
 
                 //---- cutbtn1 ----
                 cutbtn1.setText("\u526a\u5207(T)");
                 cutbtn1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_DOWN_MASK));
                 cutbtn1.setMnemonic('T');
-                cutbtn1.addActionListener(e -> menuItem4(e));
+                cutbtn1.addActionListener(e -> cut(e));
                 editormenu.add(cutbtn1);
 
                 //---- copybtn1 ----
                 copybtn1.setText("\u590d\u5236(C)");
                 copybtn1.setMnemonic('C');
                 copybtn1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK));
-                copybtn1.addActionListener(e -> menuItem8(e));
+                copybtn1.addActionListener(e -> copy(e));
                 editormenu.add(copybtn1);
 
-                //---- menuItem16 ----
-                menuItem16.setText("\u7c98\u8d34(V)");
-                menuItem16.setMnemonic('V');
-                menuItem16.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_DOWN_MASK));
-                menuItem16.addActionListener(e -> menuItem16(e));
-                editormenu.add(menuItem16);
+                //---- pastebtn ----
+                pastebtn.setText("\u7c98\u8d34(V)");
+                pastebtn.setMnemonic('V');
+                pastebtn.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_DOWN_MASK));
+                pastebtn.addActionListener(e -> paste(e));
+                editormenu.add(pastebtn);
 
                 //======== menu3 ========
                 {
                     menu3.setText("\u67e5\u627e(F)");
                     menu3.setMnemonic('F');
 
-                    //---- menuItem7 ----
-                    menuItem7.setText("\u67e5\u627e(F)");
-                    menuItem7.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_DOWN_MASK));
-                    menuItem7.setMnemonic('F');
-                    menu3.add(menuItem7);
+                    //---- searchbtn1 ----
+                    searchbtn1.setText("\u67e5\u627e(F)");
+                    searchbtn1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_DOWN_MASK));
+                    searchbtn1.setMnemonic('F');
+                    searchbtn1.addActionListener(e -> search(e));
+                    menu3.add(searchbtn1);
 
-                    //---- menuItem10 ----
-                    menuItem10.setText("\u66ff\u6362(R)");
-                    menuItem10.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK));
-                    menuItem10.setMnemonic('R');
-                    menu3.add(menuItem10);
+                    //---- replacebtn1 ----
+                    replacebtn1.setText("\u66ff\u6362(R)");
+                    replacebtn1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK));
+                    replacebtn1.setMnemonic('R');
+                    replacebtn1.addActionListener(e -> replace(e));
+                    menu3.add(replacebtn1);
                 }
                 editormenu.add(menu3);
                 editormenu.addSeparator();
@@ -321,7 +350,7 @@ public class RootView extends JFrame {
                 deletebtn1.setText("\u5220\u9664(D)");
                 deletebtn1.setMnemonic('D');
                 deletebtn1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0));
-                deletebtn1.addActionListener(e -> menuItem9(e));
+                deletebtn1.addActionListener(e -> delete(e));
                 editormenu.add(deletebtn1);
                 editormenu.addSeparator();
 
@@ -329,7 +358,7 @@ public class RootView extends JFrame {
                 allbtn1.setText("\u5168\u9009(A)");
                 allbtn1.setMnemonic('A');
                 allbtn1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_DOWN_MASK));
-                allbtn1.addActionListener(e -> menuItem12(e));
+                allbtn1.addActionListener(e -> all(e));
                 editormenu.add(allbtn1);
             }
             menuBar1.add(editormenu);
@@ -404,81 +433,109 @@ public class RootView extends JFrame {
         //======== popupMenu1 ========
         {
 
-            //---- menuItem17 ----
-            menuItem17.setText("\u590d\u5236\u6587\u4ef6\u8def\u5f84");
-            popupMenu1.add(menuItem17);
+            //---- copypath ----
+            copypath.setText("\u590d\u5236\u6587\u4ef6\u8def\u5f84");
+            copypath.addActionListener(e -> copypath(e));
+            popupMenu1.add(copypath);
 
-            //---- menuItem18 ----
-            menuItem18.setText("\u6253\u5f00\u8def\u5f84\u6587\u4ef6\u5939");
-            menuItem18.addActionListener(e -> menuItem18(e));
-            popupMenu1.add(menuItem18);
+            //---- openpath ----
+            openpath.setText("\u6253\u5f00\u8def\u5f84\u6587\u4ef6\u5939");
+            openpath.addActionListener(e -> openpath(e));
+            popupMenu1.add(openpath);
             popupMenu1.addSeparator();
 
-            //---- menuItem19 ----
-            menuItem19.setText("\u91cd\u547d\u540d");
-            menuItem19.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
-            menuItem19.addActionListener(e -> menuItem19(e));
-            popupMenu1.add(menuItem19);
+            //---- rename ----
+            rename.setText("\u91cd\u547d\u540d");
+            rename.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
+            rename.addActionListener(e -> rename(e));
+            popupMenu1.add(rename);
         }
 
         //======== popupMenu2 ========
         {
 
-            //---- menuItem20 ----
-            menuItem20.setText("\u64a4\u9500(U)");
-            menuItem20.setMnemonic('U');
-            menuItem20.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK));
-            popupMenu2.add(menuItem20);
+            //---- undobtn2 ----
+            undobtn2.setText("\u64a4\u9500(U)");
+            undobtn2.setMnemonic('U');
+            undobtn2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK));
+            undobtn2.addActionListener(e -> undo(e));
+            popupMenu2.add(undobtn2);
 
-            //---- menuItem21 ----
-            menuItem21.setText("\u6062\u590d(R)");
-            popupMenu2.add(menuItem21);
+            //---- redobtn2 ----
+            redobtn2.setText("\u6062\u590d(R)");
+            redobtn2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK|KeyEvent.SHIFT_DOWN_MASK));
+            redobtn2.setMnemonic('R');
+            redobtn2.addActionListener(e -> redo(e));
+            popupMenu2.add(redobtn2);
             popupMenu2.addSeparator();
 
-            //---- menuItem22 ----
-            menuItem22.setText("\u7c98\u8d34");
-            popupMenu2.add(menuItem22);
+            //---- pastebtn2 ----
+            pastebtn2.setText("\u7c98\u8d34(V)");
+            pastebtn2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_DOWN_MASK));
+            pastebtn2.setMnemonic('V');
+            pastebtn2.addActionListener(e -> paste(e));
+            popupMenu2.add(pastebtn2);
 
-            //---- menuItem23 ----
-            menuItem23.setText("\u526a\u5207");
-            popupMenu2.add(menuItem23);
+            //---- cutbtn2 ----
+            cutbtn2.setText("\u526a\u5207(T)");
+            cutbtn2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_DOWN_MASK));
+            cutbtn2.setMnemonic('T');
+            cutbtn2.addActionListener(e -> cut(e));
+            popupMenu2.add(cutbtn2);
 
-            //---- menuItem24 ----
-            menuItem24.setText("\u590d\u5236");
-            popupMenu2.add(menuItem24);
+            //---- copybtn2 ----
+            copybtn2.setText("\u590d\u5236(C)");
+            copybtn2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK));
+            copybtn2.setMnemonic('C');
+            copybtn2.addActionListener(e -> copy(e));
+            popupMenu2.add(copybtn2);
             popupMenu2.addSeparator();
 
             //======== menu5 ========
             {
-                menu5.setText("\u67e5\u627e");
+                menu5.setText("\u67e5\u627e(F)");
+                menu5.setMnemonic('F');
 
-                //---- menuItem26 ----
-                menuItem26.setText("\u67e5\u627e");
-                menu5.add(menuItem26);
+                //---- searchbtn2 ----
+                searchbtn2.setText("\u67e5\u627e(F)");
+                searchbtn2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_DOWN_MASK));
+                searchbtn2.setMnemonic('F');
+                searchbtn2.addActionListener(e -> search(e));
+                menu5.add(searchbtn2);
 
-                //---- menuItem27 ----
-                menuItem27.setText("\u66ff\u6362");
-                menu5.add(menuItem27);
+                //---- replacebtn2 ----
+                replacebtn2.setText("\u66ff\u6362(R)");
+                replacebtn2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK));
+                replacebtn2.setMnemonic('R');
+                replacebtn2.addActionListener(e -> replace(e));
+                menu5.add(replacebtn2);
             }
             popupMenu2.add(menu5);
             popupMenu2.addSeparator();
 
-            //---- menuItem2 ----
-            menuItem2.setText("\u5220\u9664");
-            popupMenu2.add(menuItem2);
+            //---- deletebtn2 ----
+            deletebtn2.setText("\u5220\u9664(D)");
+            deletebtn2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_DOWN_MASK));
+            deletebtn2.setMnemonic('D');
+            deletebtn2.addActionListener(e -> delete(e));
+            popupMenu2.add(deletebtn2);
             popupMenu2.addSeparator();
 
-            //---- menuItem25 ----
-            menuItem25.setText("\u5168\u9009");
-            popupMenu2.add(menuItem25);
+            //---- allbtn2 ----
+            allbtn2.setText("\u5168\u9009(A)");
+            allbtn2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_DOWN_MASK));
+            allbtn2.setMnemonic('A');
+            allbtn2.addActionListener(e -> all(e));
+            popupMenu2.add(allbtn2);
         }
 
         //======== popupMenu3 ========
         {
 
-            //---- menuItem3 ----
-            menuItem3.setText("\u8df3\u8f6c\u5230\u884c");
-            popupMenu3.add(menuItem3);
+            //---- cxygo ----
+            cxygo.setText("\u8df3\u8f6c\u5230\u884c");
+            cxygo.addActionListener(e -> cxygo(e));
+            popupMenu3.add(cxygo);
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
         textPane1.setShowLineNumber(true);
@@ -493,9 +550,11 @@ public class RootView extends JFrame {
         public void insertUpdate(DocumentEvent e) {
             sum.setText("共"+textPane1.getDocument().getLength()+"字符");
             if (undoManager.canUndo()) {
-                menuItem13.setEnabled(true);
+                undobtn1.setEnabled(true);
+                undobtn2.setEnabled(true);
             }else {
-                menuItem13.setEnabled(false);
+                undobtn1.setEnabled(false);
+                undobtn2.setEnabled(false);
             }
 
         }
@@ -504,9 +563,11 @@ public class RootView extends JFrame {
             public void removeUpdate(DocumentEvent e) {
                 sum.setText("共"+textPane1.getDocument().getLength()+"字符");
                 if (undoManager.canUndo()) {
-                    menuItem13.setEnabled(true);
+                    undobtn1.setEnabled(true);
+                    undobtn2.setEnabled(true);
                 }else {
-                    menuItem13.setEnabled(false);
+                    undobtn1.setEnabled(false);
+                    undobtn2.setEnabled(false);
                 }
 
             }
@@ -515,9 +576,11 @@ public class RootView extends JFrame {
             public void changedUpdate(DocumentEvent e) {
                 sum.setText("共"+textPane1.getDocument().getLength()+"字符");
                 if (undoManager.canUndo()) {
-                    menuItem13.setEnabled(true);
+                    undobtn1.setEnabled(true);
+                    undobtn2.setEnabled(true);
                 }else {
-                    menuItem13.setEnabled(false);
+                    undobtn1.setEnabled(false);
+                    undobtn2.setEnabled(false);
                 }
             }
             UndoManager undoManager = textPane1.getUndoManager();
@@ -536,14 +599,14 @@ public class RootView extends JFrame {
     private JMenuItem saveofbtn1;
     private JMenuItem exitbtn;
     private JMenu editormenu;
-    private JMenuItem menuItem13;
-    private JMenuItem menuItem1;
+    private JMenuItem undobtn1;
+    private JMenuItem redobtn1;
     private JMenuItem cutbtn1;
     private JMenuItem copybtn1;
-    private JMenuItem menuItem16;
+    private JMenuItem pastebtn;
     private JMenu menu3;
-    private JMenuItem menuItem7;
-    private JMenuItem menuItem10;
+    private JMenuItem searchbtn1;
+    private JMenuItem replacebtn1;
     private JMenuItem deletebtn1;
     private JMenuItem allbtn1;
     private JMenu helpmenu;
@@ -555,21 +618,21 @@ public class RootView extends JFrame {
     private JLabel Cxy;
     private JLabel sum;
     private JPopupMenu popupMenu1;
-    private JMenuItem menuItem17;
-    private JMenuItem menuItem18;
-    private JMenuItem menuItem19;
+    private JMenuItem copypath;
+    private JMenuItem openpath;
+    private JMenuItem rename;
     private JPopupMenu popupMenu2;
-    private JMenuItem menuItem20;
-    private JMenuItem menuItem21;
-    private JMenuItem menuItem22;
-    private JMenuItem menuItem23;
-    private JMenuItem menuItem24;
+    private JMenuItem undobtn2;
+    private JMenuItem redobtn2;
+    private JMenuItem pastebtn2;
+    private JMenuItem cutbtn2;
+    private JMenuItem copybtn2;
     private JMenu menu5;
-    private JMenuItem menuItem26;
-    private JMenuItem menuItem27;
-    private JMenuItem menuItem2;
-    private JMenuItem menuItem25;
+    private JMenuItem searchbtn2;
+    private JMenuItem replacebtn2;
+    private JMenuItem deletebtn2;
+    private JMenuItem allbtn2;
     private JPopupMenu popupMenu3;
-    private JMenuItem menuItem3;
+    private JMenuItem cxygo;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

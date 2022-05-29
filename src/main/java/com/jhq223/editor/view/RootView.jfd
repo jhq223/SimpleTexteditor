@@ -64,7 +64,7 @@ new FormModel {
 						"accelerator": static javax.swing.KeyStroke getKeyStroke( 83, 130, false )
 						"mnemonic": 83
 						"enabled": false
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem3", true ) )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "save", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "saveofbtn1"
@@ -78,7 +78,7 @@ new FormModel {
 						name: "exitbtn"
 						"text": "退出(X)"
 						"mnemonic": 88
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem5", true ) )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "exitbtn", true ) )
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
@@ -86,18 +86,19 @@ new FormModel {
 					"text": "编辑(E)"
 					"mnemonic": 69
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem13"
+						name: "undobtn1"
 						"text": "撤销(U)"
 						"mnemonic": 85
 						"accelerator": &KeyStroke0 static javax.swing.KeyStroke getKeyStroke( 90, 130, false )
 						"enabled": false
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem13", true ) )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "undo", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem1"
+						name: "redobtn1"
 						"text": "恢复(R)"
-						"accelerator": static javax.swing.KeyStroke getKeyStroke( 90, 195, false )
+						"accelerator": &KeyStroke1 static javax.swing.KeyStroke getKeyStroke( 90, 195, false )
 						"enabled": false
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "redo", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
 						name: "separator5"
@@ -105,39 +106,41 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "cutbtn1"
 						"text": "剪切(T)"
-						"accelerator": static javax.swing.KeyStroke getKeyStroke( 88, 130, false )
+						"accelerator": &KeyStroke2 static javax.swing.KeyStroke getKeyStroke( 88, 130, false )
 						"mnemonic": 84
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem4", true ) )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cut", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "copybtn1"
 						"text": "复制(C)"
 						"mnemonic": 67
-						"accelerator": static javax.swing.KeyStroke getKeyStroke( 67, 130, false )
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem8", true ) )
+						"accelerator": &KeyStroke3 static javax.swing.KeyStroke getKeyStroke( 67, 130, false )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "copy", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem16"
+						name: "pastebtn"
 						"text": "粘贴(V)"
 						"mnemonic": 86
-						"accelerator": static javax.swing.KeyStroke getKeyStroke( 86, 130, false )
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem16", true ) )
+						"accelerator": &KeyStroke4 static javax.swing.KeyStroke getKeyStroke( 86, 130, false )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "paste", true ) )
 					} )
 					add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 						name: "menu3"
 						"text": "查找(F)"
 						"mnemonic": 70
 						add( new FormComponent( "javax.swing.JMenuItem" ) {
-							name: "menuItem7"
+							name: "searchbtn1"
 							"text": "查找(F)"
-							"accelerator": static javax.swing.KeyStroke getKeyStroke( 70, 130, false )
+							"accelerator": &KeyStroke5 static javax.swing.KeyStroke getKeyStroke( 70, 130, false )
 							"mnemonic": 70
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "search", true ) )
 						} )
 						add( new FormComponent( "javax.swing.JMenuItem" ) {
-							name: "menuItem10"
+							name: "replacebtn1"
 							"text": "替换(R)"
-							"accelerator": static javax.swing.KeyStroke getKeyStroke( 82, 130, false )
+							"accelerator": &KeyStroke6 static javax.swing.KeyStroke getKeyStroke( 82, 130, false )
 							"mnemonic": 82
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "replace", true ) )
 						} )
 					} )
 					add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
@@ -148,7 +151,7 @@ new FormModel {
 						"text": "删除(D)"
 						"mnemonic": 68
 						"accelerator": static javax.swing.KeyStroke getKeyStroke( 127, 0, false )
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem9", true ) )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "delete", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
 						name: "separator3"
@@ -157,8 +160,8 @@ new FormModel {
 						name: "allbtn1"
 						"text": "全选(A)"
 						"mnemonic": 65
-						"accelerator": static javax.swing.KeyStroke getKeyStroke( 65, 130, false )
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem12", true ) )
+						"accelerator": &KeyStroke7 static javax.swing.KeyStroke getKeyStroke( 65, 130, false )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "all", true ) )
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
@@ -186,22 +189,23 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JPopupMenu", new FormLayoutManager( class javax.swing.JPopupMenu ) ) {
 			name: "popupMenu1"
 			add( new FormComponent( "javax.swing.JMenuItem" ) {
-				name: "menuItem17"
+				name: "copypath"
 				"text": "复制文件路径"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "copypath", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JMenuItem" ) {
-				name: "menuItem18"
+				name: "openpath"
 				"text": "打开路径文件夹"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem18", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "openpath", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
 				name: "separator6"
 			} )
 			add( new FormComponent( "javax.swing.JMenuItem" ) {
-				name: "menuItem19"
+				name: "rename"
 				"text": "重命名"
 				"accelerator": static javax.swing.KeyStroke getKeyStroke( 113, 0, false )
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem19", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "rename", true ) )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 70, 480 )
@@ -209,58 +213,84 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JPopupMenu", new FormLayoutManager( class javax.swing.JPopupMenu ) ) {
 			name: "popupMenu2"
 			add( new FormComponent( "javax.swing.JMenuItem" ) {
-				name: "menuItem20"
+				name: "undobtn2"
 				"text": "撤销(U)"
 				"mnemonic": 85
 				"accelerator": #KeyStroke0
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "undo", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JMenuItem" ) {
-				name: "menuItem21"
+				name: "redobtn2"
 				"text": "恢复(R)"
+				"accelerator": #KeyStroke1
+				"mnemonic": 82
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "redo", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
 				name: "separator7"
 			} )
 			add( new FormComponent( "javax.swing.JMenuItem" ) {
-				name: "menuItem22"
-				"text": "粘贴"
+				name: "pastebtn2"
+				"text": "粘贴(V)"
+				"accelerator": #KeyStroke4
+				"mnemonic": 86
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "paste", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JMenuItem" ) {
-				name: "menuItem23"
-				"text": "剪切"
+				name: "cutbtn2"
+				"text": "剪切(T)"
+				"accelerator": #KeyStroke2
+				"mnemonic": 84
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cut", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JMenuItem" ) {
-				name: "menuItem24"
-				"text": "复制"
+				name: "copybtn2"
+				"text": "复制(C)"
+				"accelerator": #KeyStroke3
+				"mnemonic": 67
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "copy", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
 				name: "separator9"
 			} )
 			add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 				name: "menu5"
-				"text": "查找"
+				"text": "查找(F)"
+				"mnemonic": 70
 				add( new FormComponent( "javax.swing.JMenuItem" ) {
-					name: "menuItem26"
-					"text": "查找"
+					name: "searchbtn2"
+					"text": "查找(F)"
+					"accelerator": #KeyStroke5
+					"mnemonic": 70
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "search", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JMenuItem" ) {
-					name: "menuItem27"
-					"text": "替换"
+					name: "replacebtn2"
+					"text": "替换(R)"
+					"accelerator": #KeyStroke6
+					"mnemonic": 82
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "replace", true ) )
 				} )
 			} )
 			add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
 				name: "separator8"
 			} )
 			add( new FormComponent( "javax.swing.JMenuItem" ) {
-				name: "menuItem2"
-				"text": "删除"
+				name: "deletebtn2"
+				"text": "删除(D)"
+				"accelerator": static javax.swing.KeyStroke getKeyStroke( 68, 130, false )
+				"mnemonic": 68
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "delete", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
 				name: "separator10"
 			} )
 			add( new FormComponent( "javax.swing.JMenuItem" ) {
-				name: "menuItem25"
-				"text": "全选"
+				name: "allbtn2"
+				"text": "全选(A)"
+				"accelerator": #KeyStroke7
+				"mnemonic": 65
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "all", true ) )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 275, 480 )
@@ -268,11 +298,12 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JPopupMenu", new FormLayoutManager( class javax.swing.JPopupMenu ) ) {
 			name: "popupMenu3"
 			add( new FormComponent( "javax.swing.JMenuItem" ) {
-				name: "menuItem3"
+				name: "cxygo"
 				"text": "跳转到行"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cxygo", true ) )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 400, 510 )
+			"location": new java.awt.Point( 485, 550 )
 		} )
 	}
 }
