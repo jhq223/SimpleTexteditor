@@ -26,21 +26,20 @@ public class ViewController {
 
     //-----退出方法-----
     public static void exit(RootView rootView) {
-        if (JOptionPane.showConfirmDialog(null,"确认退出？","退出",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "确认退出？", "退出", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
             rootView.dispose();
             System.exit(0);
         }
     }
 
 
-
     public static void main(String[] args) {
 
         //-----初始化主题-----
         try {
-            UIManager.setLookAndFeel( new FlatDarculaLaf() );
-        } catch( Exception ex ) {
-            System.err.println( "Failed to initialize LaF" );
+            UIManager.setLookAndFeel(new FlatDarculaLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
         }
 
         //===== 初始化程序 =====

@@ -36,8 +36,8 @@ public class MyTextPane extends JTextPane {
      */
     private int ColumnAtCaret;
     /*
-    *是否绘制行数，默认关闭
-    */
+     *是否绘制行数，默认关闭
+     */
     private boolean showLineNumber = false;
 
     //-----设置撤销监听器-----
@@ -54,27 +54,24 @@ public class MyTextPane extends JTextPane {
      * created and set, and the document model set to <code>null</code>.
      */
     public MyTextPane() {
-       getDocument().addUndoableEditListener(undoManager);
-
-
+        getDocument().addUndoableEditListener(undoManager);
     }
 
-    public UndoManager getUndoManager(){
+    public UndoManager getUndoManager() {
         return undoManager;
     }
 
 
     public int getLineAtCaret() {
-
         int carePosition = getCaretPosition();
-        return element.getElementIndex(carePosition)+1;
+        return element.getElementIndex(carePosition) + 1;
     }
 
     public int getColumnAtCaret() {
         int carePosition = getCaretPosition();
-        int line= element.getElementIndex(carePosition);
+        int line = element.getElementIndex(carePosition);
         int linestart = element.getElement(line).getStartOffset();
-        return carePosition-linestart+1;
+        return carePosition - linestart + 1;
     }
 
 
@@ -97,27 +94,27 @@ public class MyTextPane extends JTextPane {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        if(isShowLineNumber()){
+        if (isShowLineNumber()) {
             drawLineNumber(g);
         }
     }
 
 
-    protected void drawLineNumber(Graphics g){
-        setMargin(new Insets(0,30,0,0));
+    protected void drawLineNumber(Graphics g) {
+        setMargin(new Insets(0, 30, 0, 0));
         g.setColor(new Color(49, 51, 53));
-        g.fillRect(0,0,30,getHeight());
+        g.fillRect(0, 0, 30, getHeight());
 
         g.setColor(new Color(213, 221, 239));
         g.setFont(getFont());
         int Si = getFont().getSize();
         for (int i = 0; i < getRows(); i++) {
-            if (i<9) {
-                g.drawString("  "+String.valueOf(i+1),0,(i+1)*(Si+6)-6);
-            } else if (i<99) {
-                g.drawString(" "+String.valueOf(i+1),0,(i+1)*(Si+6)-6);
-            }else {
-                g.drawString(String.valueOf(i+1),0,(i+1)*(Si+6)-6);
+            if (i < 9) {
+                g.drawString("  " + String.valueOf(i + 1), 0, (i + 1) * (Si + 6) - 6);
+            } else if (i < 99) {
+                g.drawString(" " + String.valueOf(i + 1), 0, (i + 1) * (Si + 6) - 6);
+            } else {
+                g.drawString(String.valueOf(i + 1), 0, (i + 1) * (Si + 6) - 6);
             }
 
         }
