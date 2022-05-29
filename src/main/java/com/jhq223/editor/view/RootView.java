@@ -83,7 +83,12 @@ public class RootView extends JFrame {
 
     //===== 保存为 =====
     private void saveofbtn1(ActionEvent e) {
-        // TODO add your code here
+        var file =  FileModel.saveofFile(textPane1);
+        if (file != null) {
+            textPane1.setText(FileModel.readFile(file));
+            Mypath.setText(String.valueOf(file));
+            savebtn1.setEnabled(true);
+        }
     }
 
     //-----菜单退出-----
@@ -132,12 +137,13 @@ public class RootView extends JFrame {
 
     //===== 搜索 =====
     private void search(ActionEvent e) {
-        // TODO add your code here
+        searchrootbar.setVisible(true);
+        replacebar.setVisible(false);
     }
 
     //===== 替换 =====
     private void replace(ActionEvent e) {
-        // TODO add your code here
+        searchrootbar.setVisible(true);
     }
 
 
@@ -214,6 +220,16 @@ public class RootView extends JFrame {
         helpmenu = new JMenu();
         helpbtn = new JMenuItem();
         aboutbtn = new JMenuItem();
+        searchrootbar = new JPanel();
+        searchbar = new JPanel();
+        searchtext = new JTextField();
+        isreplaece = new JCheckBox();
+        lastbtn = new JButton();
+        nextbtn = new JButton();
+        closebtn = new JButton();
+        replacebar = new JPanel();
+        textField2 = new JTextField();
+        replaecebtn = new JButton();
         scrollPane1 = new JScrollPane();
         textPane1 = new MyTextPane();
         Mypath = new JLabel();
@@ -249,8 +265,11 @@ public class RootView extends JFrame {
             "[66,fill]" +
             "[36,fill]",
             // rows
-            "[323,fill]" +
-            "[28,fill]"));
+            "rel[0,fill]rel" +
+            "[0]rel" +
+            "[310,fill]rel" +
+            "[30]2" +
+            "[fill]2"));
 
         //======== menuBar1 ========
         {
@@ -330,28 +349,6 @@ public class RootView extends JFrame {
                 pastebtn.addActionListener(e -> paste(e));
                 editormenu.add(pastebtn);
 
-                //======== menu3 ========
-                {
-                    menu3.setText("\u67e5\u627e(F)");
-                    menu3.setMnemonic('F');
-
-                    //---- searchbtn1 ----
-                    searchbtn1.setText("\u67e5\u627e(F)");
-                    searchbtn1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_DOWN_MASK));
-                    searchbtn1.setMnemonic('F');
-                    searchbtn1.addActionListener(e -> search(e));
-                    menu3.add(searchbtn1);
-
-                    //---- replacebtn1 ----
-                    replacebtn1.setText("\u66ff\u6362(R)");
-                    replacebtn1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK));
-                    replacebtn1.setMnemonic('R');
-                    replacebtn1.addActionListener(e -> replace(e));
-                    menu3.add(replacebtn1);
-                }
-                editormenu.add(menu3);
-                editormenu.addSeparator();
-
                 //---- deletebtn1 ----
                 deletebtn1.setText("\u5220\u9664(D)");
                 deletebtn1.setMnemonic('D');
@@ -406,7 +403,7 @@ public class RootView extends JFrame {
             });
             scrollPane1.setViewportView(textPane1);
         }
-        contentPane.add(scrollPane1, "cell 0 0 4 1,dock center");
+        contentPane.add(scrollPane1, "cell 0 0 4 3,dock center");
 
         //---- Mypath ----
         Mypath.setText("\u8def\u5f84");
@@ -416,7 +413,7 @@ public class RootView extends JFrame {
                 MypathMouseReleased(e);
             }
         });
-        contentPane.add(Mypath, "cell 0 1");
+        contentPane.add(Mypath, "cell 0 3");
 
         //---- Cxy ----
         Cxy.setText("\u884c\u5217");
@@ -427,12 +424,12 @@ public class RootView extends JFrame {
                 CxyMouseReleased(e);
             }
         });
-        contentPane.add(Cxy, "cell 1 1,aligny center,grow 100 0");
+        contentPane.add(Cxy, "cell 2 3");
 
         //---- sum ----
         sum.setText("\u603b\u5b57\u7b26\u6570");
         sum.setHorizontalAlignment(SwingConstants.CENTER);
-        contentPane.add(sum, "cell 3 1,aligny center,grow 100 0");
+        contentPane.add(sum, "cell 3 3");
         pack();
         setLocationRelativeTo(getOwner());
 
@@ -497,28 +494,6 @@ public class RootView extends JFrame {
             copybtn2.setMnemonic('C');
             copybtn2.addActionListener(e -> copy(e));
             popupMenu2.add(copybtn2);
-            popupMenu2.addSeparator();
-
-            //======== menu5 ========
-            {
-                menu5.setText("\u67e5\u627e(F)");
-                menu5.setMnemonic('F');
-
-                //---- searchbtn2 ----
-                searchbtn2.setText("\u67e5\u627e(F)");
-                searchbtn2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_DOWN_MASK));
-                searchbtn2.setMnemonic('F');
-                searchbtn2.addActionListener(e -> search(e));
-                menu5.add(searchbtn2);
-
-                //---- replacebtn2 ----
-                replacebtn2.setText("\u66ff\u6362(R)");
-                replacebtn2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK));
-                replacebtn2.setMnemonic('R');
-                replacebtn2.addActionListener(e -> replace(e));
-                menu5.add(replacebtn2);
-            }
-            popupMenu2.add(menu5);
             popupMenu2.addSeparator();
 
             //---- deletebtn2 ----
@@ -643,6 +618,16 @@ public class RootView extends JFrame {
     private JMenu helpmenu;
     private JMenuItem helpbtn;
     private JMenuItem aboutbtn;
+    private JPanel searchrootbar;
+    private JPanel searchbar;
+    private JTextField searchtext;
+    private JCheckBox isreplaece;
+    private JButton lastbtn;
+    private JButton nextbtn;
+    private JButton closebtn;
+    private JPanel replacebar;
+    private JTextField textField2;
+    private JButton replaecebtn;
     private JScrollPane scrollPane1;
     private MyTextPane textPane1;
     private JLabel Mypath;

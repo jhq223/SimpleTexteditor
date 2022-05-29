@@ -8,6 +8,8 @@
 
 package com.jhq223.editor.model;
 
+import com.jhq223.editor.view.MyTextPane;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
@@ -62,5 +64,21 @@ public class FileModel {
         }
         return newstr;
 
+    }
+    public static File saveofFile(MyTextPane myTextPane) {
+        var fileChooser = new JFileChooser();
+        var ret = fileChooser.showSaveDialog(myTextPane);
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            try{
+                FileWriter fileWriter = new FileWriter(fileChooser.getSelectedFile());
+                fileWriter.write(myTextPane.getText());
+                fileWriter.close();
+            }catch (IOException ex){
+                JOptionPane.showMessageDialog(null, "发生错误", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            return fileChooser.getSelectedFile();
+
+        }
+        return null;
     }
 }
