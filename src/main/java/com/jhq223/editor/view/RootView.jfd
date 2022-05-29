@@ -172,13 +172,13 @@ new FormModel {
 						name: "helpbtn"
 						"text": "帮助(H)"
 						"mnemonic": 72
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem14", true ) )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "help", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "aboutbtn"
 						"text": "关于(A)"
 						"mnemonic": 65
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem15", true ) )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "about", true ) )
 					} )
 				} )
 			}
@@ -217,6 +217,7 @@ new FormModel {
 				"text": "撤销(U)"
 				"mnemonic": 85
 				"accelerator": #KeyStroke0
+				"enabled": false
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "undo", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JMenuItem" ) {
@@ -224,6 +225,7 @@ new FormModel {
 				"text": "恢复(R)"
 				"accelerator": #KeyStroke1
 				"mnemonic": 82
+				"enabled": false
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "redo", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {

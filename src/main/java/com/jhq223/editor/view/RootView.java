@@ -34,20 +34,44 @@ public class RootView extends JFrame {
         initComponents();
     }
 
+    /**
+    *监听事件
+    */
 
     //-----监听光标位置-----
     private void textPane1CaretUpdate(CaretEvent e) {
         Cxy.setText("第"+textPane1.getLineAtCaret()+"行,第"+textPane1.getColumnAtCaret()+"列");
     }
 
-    //*****菜单事件*****
+    private void textPane1MouseReleased(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            popupMenu2.show(e.getComponent(),e.getX(),e.getY());
+        }
+    }
+
+    private void MypathMouseReleased(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            popupMenu1.show(e.getComponent(),e.getX(),e.getY());
+        }
+    }
+
+    private void CxyMouseReleased(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            popupMenu3.show(e.getComponent(),e.getX(),e.getY());
+        }
+    }
+
+    /**
+     * 菜单事件
+     */
 
     //-----打开-----
-    private void menuItem2(ActionEvent e) {
+    private void open(ActionEvent e) {
         var file =  FileModel.openFile();
         if (file != null) {
             textPane1.setText(FileModel.readFile(file));
             Mypath.setText(String.valueOf(file));
+            savebtn1.setEnabled(true);
         }
     }
 
@@ -57,15 +81,28 @@ public class RootView extends JFrame {
         FileModel.saveFile(new File(Mypath.getText()),textPane1.getText());
     }
 
+    //===== 保存为 =====
+    private void saveofbtn1(ActionEvent e) {
+        // TODO add your code here
+    }
+
     //-----菜单退出-----
     private void exitbtn(ActionEvent e) {
        ViewController.exit(this);
     }
 
+    //***** 菜单2 *****
+
     //-----撤销-----
     private void undo(ActionEvent e) {
          textPane1.getUndoManager().undo();
     }
+
+    //===== 恢复 =====
+    private void redo(ActionEvent e) {
+        textPane1.getUndoManager().redo();
+    }
+
 
     //-----剪切-----
     private void cut(ActionEvent e) {
@@ -93,13 +130,26 @@ public class RootView extends JFrame {
         textPane1.selectAll();
     }
 
+    //===== 搜索 =====
+    private void search(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    //===== 替换 =====
+    private void replace(ActionEvent e) {
+        // TODO add your code here
+    }
+
+
+    //***** 菜单3 *****
+
     //-----帮助-----
-    private void menuItem14(ActionEvent e) {
+    private void help(ActionEvent e) {
         JOptionPane.showMessageDialog(null,"最好的帮助就是没有帮助");
     }
 
     //-----关于-----
-    private void menuItem15(ActionEvent e) {
+    private void about(ActionEvent e) {
         JOptionPane.showMessageDialog(null,"今何求的Java课设\n欢迎参考\n代码已开源至Github\n在Github上搜索jhq223即可找到我");
     }
 
@@ -110,9 +160,7 @@ public class RootView extends JFrame {
         }
     }
 
-
-
-
+  //***** 弹出菜单1 *****
     //----重命名-----
     private void rename(ActionEvent e) {
         String newname = JOptionPane.showInputDialog(null,"请输入文件名",new File(Mypath.getText()).getName());
@@ -120,7 +168,7 @@ public class RootView extends JFrame {
     }
 
     //-----复制路径-----
-    private void menuItem17(ActionEvent e) {
+    private void copypath(ActionEvent e) {
         String con = Mypath.getText();
         if (con != null) {
             StringSelection stringSelection = new StringSelection(con);
@@ -137,53 +185,11 @@ public class RootView extends JFrame {
         }
     }
 
-    private void open(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void saveofbtn1(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void textPane1MouseReleased(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON3) {
-            popupMenu2.show(e.getComponent(),e.getX(),e.getY());
-        }
-    }
-
-    private void MypathMouseReleased(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON3) {
-            popupMenu1.show(e.getComponent(),e.getX(),e.getY());
-        }
-    }
-
-    private void CxyMouseReleased(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON3) {
-            popupMenu3.show(e.getComponent(),e.getX(),e.getY());
-        }
-    }
-
-    private void search(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void replace(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void redo(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void copypath(ActionEvent e) {
-        // TODO add your code here
-    }
+    //***** 弹出菜单3 *****
 
     private void cxygo(ActionEvent e) {
         // TODO add your code here
     }
-
-    //*****菜单事件*****
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -371,13 +377,13 @@ public class RootView extends JFrame {
                 //---- helpbtn ----
                 helpbtn.setText("\u5e2e\u52a9(H)");
                 helpbtn.setMnemonic('H');
-                helpbtn.addActionListener(e -> menuItem14(e));
+                helpbtn.addActionListener(e -> help(e));
                 helpmenu.add(helpbtn);
 
                 //---- aboutbtn ----
                 aboutbtn.setText("\u5173\u4e8e(A)");
                 aboutbtn.setMnemonic('A');
-                aboutbtn.addActionListener(e -> menuItem15(e));
+                aboutbtn.addActionListener(e -> about(e));
                 helpmenu.add(aboutbtn);
             }
             menuBar1.add(helpmenu);
@@ -458,6 +464,7 @@ public class RootView extends JFrame {
             undobtn2.setText("\u64a4\u9500(U)");
             undobtn2.setMnemonic('U');
             undobtn2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK));
+            undobtn2.setEnabled(false);
             undobtn2.addActionListener(e -> undo(e));
             popupMenu2.add(undobtn2);
 
@@ -465,6 +472,7 @@ public class RootView extends JFrame {
             redobtn2.setText("\u6062\u590d(R)");
             redobtn2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK|KeyEvent.SHIFT_DOWN_MASK));
             redobtn2.setMnemonic('R');
+            redobtn2.setEnabled(false);
             redobtn2.addActionListener(e -> redo(e));
             popupMenu2.add(redobtn2);
             popupMenu2.addSeparator();
@@ -538,26 +546,33 @@ public class RootView extends JFrame {
             popupMenu3.add(cxygo);
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
+
         textPane1.setShowLineNumber(true);
         Cxy.setText("第"+textPane1.getLineAtCaret()+"行,第"+textPane1.getColumnAtCaret()+"列");
         sum.setText("共"+textPane1.getDocument().getLength()+"字符");
 
 
-
         //-----text监听改变-----
         textPane1.getDocument().addDocumentListener(new DocumentListener() {
             @Override
-        public void insertUpdate(DocumentEvent e) {
-            sum.setText("共"+textPane1.getDocument().getLength()+"字符");
-            if (undoManager.canUndo()) {
-                undobtn1.setEnabled(true);
-                undobtn2.setEnabled(true);
-            }else {
-                undobtn1.setEnabled(false);
-                undobtn2.setEnabled(false);
-            }
+            public void insertUpdate(DocumentEvent e) {
+                sum.setText("共"+textPane1.getDocument().getLength()+"字符");
+                if (undoManager.canUndo()) {
+                    undobtn1.setEnabled(true);
+                    undobtn2.setEnabled(true);
+                }else {
+                    undobtn1.setEnabled(false);
+                    undobtn2.setEnabled(false);
+                }
+                if (undoManager.canRedo()) {
+                    redobtn1.setEnabled(true);
+                    redobtn2.setEnabled(true);
+                }else {
+                    redobtn1.setEnabled(false);
+                    redobtn2.setEnabled(false);
+                }
 
-        }
+            }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
@@ -568,6 +583,14 @@ public class RootView extends JFrame {
                 }else {
                     undobtn1.setEnabled(false);
                     undobtn2.setEnabled(false);
+                }
+
+                if (undoManager.canRedo()) {
+                    redobtn1.setEnabled(true);
+                    redobtn2.setEnabled(true);
+                }else {
+                    redobtn1.setEnabled(false);
+                    redobtn2.setEnabled(false);
                 }
 
             }
@@ -582,13 +605,21 @@ public class RootView extends JFrame {
                     undobtn1.setEnabled(false);
                     undobtn2.setEnabled(false);
                 }
+
+                if (undoManager.canRedo()) {
+                    redobtn1.setEnabled(true);
+                    redobtn2.setEnabled(true);
+                }else {
+                    redobtn1.setEnabled(false);
+                    redobtn2.setEnabled(false);
+                }
             }
             UndoManager undoManager = textPane1.getUndoManager();
         });
 
 
 
-                                                     }
+    }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - 今何求
