@@ -70,6 +70,7 @@ public class RootView extends JFrame {
         var file =  FileModel.openFile();
         if (file != null) {
             textPane1.setText(FileModel.readFile(file));
+            Mypath.setVisible(true);
             Mypath.setText(String.valueOf(file));
             savebtn1.setEnabled(true);
         }
@@ -86,6 +87,7 @@ public class RootView extends JFrame {
         var file =  FileModel.saveofFile(textPane1);
         if (file != null) {
             textPane1.setText(FileModel.readFile(file));
+            Mypath.setVisible(true);
             Mypath.setText(String.valueOf(file));
             savebtn1.setEnabled(true);
         }
@@ -523,6 +525,7 @@ public class RootView extends JFrame {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
 
         textPane1.setShowLineNumber(true);
+        Mypath.setVisible(false);
         Cxy.setText("第"+textPane1.getLineAtCaret()+"行,第"+textPane1.getColumnAtCaret()+"列");
         sum.setText("共"+textPane1.getDocument().getLength()+"字符");
 
